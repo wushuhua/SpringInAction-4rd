@@ -1,21 +1,16 @@
 package com.zh.config;
 
 import com.zh.soundsystem.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 /**
  * Created by zh on 2017-02-13.
  */
 @Configuration
 @ComponentScan(basePackageClasses = Ballad.class)
+@Import(CDConfig.class)
+@ImportResource("classpath:componentscan.xml")
 public class CDPlayerConfig {
-
-    @Bean
-    public CompactDisc sgtPeppers() {
-        return new SgtPeppers();
-    }
 
     @Bean
     public CompactDisc randomBeatlesCD() {
@@ -29,16 +24,6 @@ public class CDPlayerConfig {
         } else {
             return new Revolver();
         }
-    }
-
-    @Bean
-    public CDPlayer cdPlayer() {
-        return new CDPlayer(sgtPeppers());
-    }
-
-    @Bean
-    public CDPlayer anotherCDPlayer() {
-        return new CDPlayer(sgtPeppers());
     }
 
     /** 自动装配sgtPeppers() */

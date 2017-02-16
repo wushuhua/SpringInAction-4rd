@@ -1,12 +1,7 @@
 import com.zh.config.CDPlayerConfig;
 import com.zh.soundsystem.CompactDisc;
 import com.zh.soundsystem.MediaPlayer;
-import com.zh.soundsystem.SgtPeppers;
-import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,15 +17,8 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(classes = CDPlayerConfig.class)
 public class CDPlayerTest {
 
-    @Rule
-    public final TestWatcher testWatcher = new TestWatcher() {
-        @Override
-        protected void failed(Throwable e, Description description) {
-            super.failed(e, description);
-        }
-    };
-
     @Autowired
+    @Qualifier("cdPlayer")
     private MediaPlayer mediaPlayer;
 
     @Autowired

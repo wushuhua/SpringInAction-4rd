@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context = "http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -9,5 +10,33 @@
 
     <bean id="compactDisc" class="com.zh.soundsystem.SgtPeppers" />
 
+    <!--DI的两种方式-->
+    <!--构造器-->
+    <!--c命名空间-->
+    <bean id="compactDiscOther" class="com.zh.soundsystem.BlankDisc">
+        <constructor-arg value = "Sgt. Pepper's Lonely Hearts Club Band" />
+        <constructor-arg value = "The Beatles" />
+    </bean>
+
+    <bean id="compactDiscOtherElse" class="com.zh.soundsystem.BlankDisc"
+          c:title="Sgt. Pepper's Lonely Hearts Club Band"
+          c:artist="The Beatles" />
+    <bean id="compactDisc4" class="com.zh.soundsystem.BlankDisc" c:_0="Sgt. Pepper's Lonely Hearts Club Band"/>
+
+    <!--构造器可以为集合参数赋值，c命名空间不行-->
+    <bean id="compactDisc5" class="com.zh.soundsystem.BlankDisc">
+        <constructor-arg value = "Sgt. Pepper's Lonely Hearts Club Band" />
+        <constructor-arg value = "The Beatles" />
+        <!--<constructor-arg><null/></constructor-arg>-->
+        <constructor-arg>
+            <list>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+                <value>With a Little Help from My Friends</value>
+                <value>Lucy in the Sky with Diamonds</value>
+                <value>Getting Better</value>
+                <value>Fixing a Hole</value>
+            </list>
+        </constructor-arg>
+    </bean>
 
 </beans>
