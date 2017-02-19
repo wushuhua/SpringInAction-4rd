@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"
+        ><!--可以加入profile='dev'属性-->
+
+    <!--beans属性profile可以定义profile的名字，可以建立多个xml文件给不同的profile名字-->
+    <!--另外beans支持嵌套，可以在beans中新建多个beans，这样可以将多个profile合并到同一个xml文件中-->
+    <beans profile="dev" >
+        <jdbc:embedded-database id="dataSource">
+            <jdbc:script location="classpath:sql/schema.sql"/>
+            <jdbc:script location="classpath:sql/test-data.sql"/>
+        </jdbc:embedded-database>
+    </beans>
+
+    <beans profile="qa">
+        <bean id="dataSource"
+              class="org.apache.commons.dbcp.BasicDataSource"
+              destroy-method="close"
+              p:url="jdbc:h2:tcp://dbserver/~/test"
+              p:driverClassName="org.h2.Driver"
+              p:username="sa"
+              p:password="password"
+              p:initialSize="20"
+              p:maxActive="30"
+              p:testOnBorrow="true"
+              p:testWhileIdle="true"/>
+    </beans>
+
+    <beans profile="prod">
+        <util:properties id="environment">
+            <prop key="spring.profiles.active">dev</prop>
+        </util:properties>
+        <jee:jndi-lookup jndi-name="jdbc/myDatabase"
+                         id="dataSource"
+                         resource-ref="true"
+                         proxy-interface="javax.sql.DataSource" />
+    </beans>
+
+</beans>
