@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="notePad" class="com.zh.scope.NotePad" scope="prototype"/>
+
+    <bean id="shoppingCart" class="com.zh.scope.ShoppingCart" scope="session">
+        <!--默认使用cglib生成类代理，proxy-target-class=false配置生成基于接口的代理-->
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
+</beans>
