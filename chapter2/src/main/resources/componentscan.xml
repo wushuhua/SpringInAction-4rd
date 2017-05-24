@@ -2,9 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context = "http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="com.zh.soundsystem"/>
 
@@ -39,4 +42,40 @@
         </constructor-arg>
     </bean>
 
+
+    <bean id="myBean" class="com.zh.config.MyBean">
+        <property name="name" value="asdf"/>
+        <property name="address" value="beijing"/>
+        <property name="age" value="10"/>
+        <property name="sexy">
+            <list>
+                <value>asdf</value>
+                <value>3e4</value>
+            </list>
+        </property>
+        <property name="arrs" ref="list1"/>
+    </bean>
+
+    <bean id="myBean1" class="com.zh.config.MyBean"
+        p:name="asdf" p:address="adsf" p:age="123" p:sexy-ref="list1" p:arrs-ref="list1"
+    ></bean>
+
+    <util:list id="list1">
+        <value>asdf</value>
+    </util:list>
+
+    <util:set id="set1">
+        <util:list id="list1"/>
+    </util:set>
+
+    <util:map>
+        <entry key="" value=""/>
+    </util:map>
+
+    <util:properties>
+        <prop key="1">asdf</prop>
+        <prop key="2">asdf</prop>
+    </util:properties>
+
+    <util:constant id="s" static-field="CDPlayerTest.s"/>
 </beans>

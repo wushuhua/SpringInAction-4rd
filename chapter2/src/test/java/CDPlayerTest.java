@@ -1,3 +1,4 @@
+import com.zh.config.MyBean;
 import com.zh.config.CDPlayerConfig;
 import com.zh.soundsystem.CompactDisc;
 import com.zh.soundsystem.MediaPlayer;
@@ -17,8 +18,10 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(classes = CDPlayerConfig.class)
 public class CDPlayerTest {
 
+    public static String s = "1";
+
     @Autowired
-    @Qualifier("cdPlayer")
+    @Qualifier("myCDPlayer")
     private MediaPlayer mediaPlayer;
 
     @Autowired
@@ -34,5 +37,14 @@ public class CDPlayerTest {
     @Test
     public void play() {
         mediaPlayer.play();
+    }
+
+    @Autowired
+    @Qualifier("myBean1")
+    private MyBean myBean;
+
+    @Test
+    public void testMyBean() {
+        System.out.println(1);
     }
 }

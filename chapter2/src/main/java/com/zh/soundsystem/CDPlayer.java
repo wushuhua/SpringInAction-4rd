@@ -13,7 +13,7 @@ public class CDPlayer implements MediaPlayer {
 
     private CompactDisc cd;
 
-    @Autowired
+    @Autowired(required = false)
     public CDPlayer (@Qualifier("ballad")CompactDisc cd) {
         this.cd = cd;
     }

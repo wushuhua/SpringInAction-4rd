@@ -19,6 +19,8 @@
         <constructor-arg value="#{T(System).out}"/>
     </bean>
 
+    <bean id="mybean" class="com.springinaction.knights.MyBean"></bean>
+
     <aop:config>
         <aop:aspect ref="ministrel">
             <!--定义切点-->

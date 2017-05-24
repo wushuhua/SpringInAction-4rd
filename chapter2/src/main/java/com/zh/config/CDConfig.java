@@ -26,4 +26,15 @@ public class CDConfig {
     public CDPlayer anotherCDPlayer() {
         return new CDPlayer(compactDisc());
     }
+
+    /**
+     * 这里接受参数时spring会自动进行compactDisc的注入
+     * @param compactDisc
+     * @return
+     */
+    @Bean
+    public CDPlayer myCDPlayer(CompactDisc compactDisc) {
+        System.out.println(compactDisc);
+        return new CDPlayer(compactDisc);
+    }
 }
